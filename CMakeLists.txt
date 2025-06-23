@@ -27,7 +27,13 @@ target_sources(PrismVST PRIVATE
     Source/TikTokUploader.cpp
     Source/TikTokUploader.h
     Source/RightsChecker.cpp
-    Source/RightsChecker.h)
+    Source/RightsChecker.h
+    Source/Audio/AudioProcessorChain.cpp
+    Source/Audio/AudioProcessorChain.h
+    Source/TikTok/TikTokAPIHandler.cpp
+    Source/TikTok/TikTokAPIHandler.h
+    Source/Video/VideoGenerator.cpp
+    Source/Video/VideoGenerator.h)
 
 target_compile_features(PrismVST PRIVATE cxx_std_17)
 

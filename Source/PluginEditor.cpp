@@ -3,7 +3,16 @@
 
 PrismAudioProcessorEditor::PrismAudioProcessorEditor(PrismAudioProcessor& p)
     : AudioProcessorEditor(&p), processor(p) {
-    setSize(400, 300);
+    addAndMakeVisible(shareButton);
+    addAndMakeVisible(statusLabel);
+    statusLabel.setJustificationType(juce::Justification::centred);
+    shareButton.onClick = [this] {
+        statusLabel.setText("Authorizing...", juce::dontSendNotification);
+        processor.getAPIHandler().authenticateAsync([this](bool ok) {
+            statusLabel.setText(ok ? "Uploading..." : "Auth Failed", juce::dontSendNotification);
+        });
+    };
+    setSize(400, 150);
 }
 
 PrismAudioProcessorEditor::~PrismAudioProcessorEditor() {}
@@ -12,7 +21,11 @@ void PrismAudioProcessorEditor::paint(juce::Graphics& g) {
     g.fillAll(juce::Colours::black);
     g.setColour(juce::Colours::white);
     g.setFont(15.0f);
-    g.drawFittedText("Prism VST3", getLocalBounds(), juce::Justification::centred, 1);
+    g.drawFittedText("Prism VST3", getLocalBounds().removeFromTop(30), juce::Justification::centred, 1);
 }
 
-void PrismAudioProcessorEditor::resized() {}
+void PrismAudioProcessorEditor::resized() {
+    auto area = getLocalBounds().reduced(20);
+    shareButton.setBounds(area.removeFromTop(30));
+    statusLabel.setBounds(area.removeFromTop(20));
+}

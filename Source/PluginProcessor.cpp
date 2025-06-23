@@ -11,14 +11,14 @@ bool PrismAudioProcessor::isBusesLayoutSupported(const BusesLayout& layouts) con
 }
 
 void PrismAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
-    loudnessProcessor.prepare(sampleRate, samplesPerBlock);
+    audioChain.prepare(sampleRate, samplesPerBlock);
 }
 
 void PrismAudioProcessor::releaseResources() {}
 
 void PrismAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer&) {
     juce::ScopedNoDenormals noDenormals;
-    loudnessProcessor.process(buffer);
+    audioChain.pushAudio(buffer);
 }
 
 juce::AudioProcessorEditor* PrismAudioProcessor::createEditor() { return new PrismAudioProcessorEditor(*this); }

@@ -1,13 +1,15 @@
 #pragma once
 #include <JuceHeader.h>
-#include "LoudnessProcessor.h"
-#include "TikTokUploader.h"
+#include "Audio/AudioProcessorChain.h"
+#include "TikTok/TikTokAPIHandler.h"
 #include "RightsChecker.h"
 
 class PrismAudioProcessor  : public juce::AudioProcessor {
 public:
     PrismAudioProcessor();
     ~PrismAudioProcessor() override;
+
+    TikTokAPIHandler& getAPIHandler() { return apiHandler; }
 
     void prepareToPlay(double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
@@ -33,8 +35,8 @@ public:
     void setStateInformation(const void* data, int sizeInBytes) override;
 
 private:
-    LoudnessProcessor loudnessProcessor;
-    TikTokUploader uploader;
+    AudioProcessorChain audioChain;
+    TikTokAPIHandler apiHandler;
     RightsChecker rightsChecker;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PrismAudioProcessor)
