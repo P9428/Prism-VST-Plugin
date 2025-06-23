@@ -1,6 +1,10 @@
 # Prism VST Plugin
 
-Prism is a lightweight example project demonstrating the basic structure of a VST-style audio plug-in. The code is intentionally minimal so developers can understand the pieces required to compile a shared library that processes audio. The sample processor simply copies its input buffer to the output buffer.
+Prism is a lightweight example project demonstrating the basic structure of a
+VST‑style audio plug‑in. The focus is on simplicity and speed so the binary can
+be dropped into any DAW and just work. The sample processor simply copies its
+input buffer to the output buffer, providing a stable starting point for your
+own effects.
 
 ## Project layout
 
@@ -11,10 +15,10 @@ Prism is a lightweight example project demonstrating the basic structure of a VS
 
 ## Downloading a release
 
-Prebuilt binaries will be provided on the project website. Download the archive
-for your operating system and follow the installation instructions below. The
-installer script copies the plug‑in to the standard VST3 directory so it can be
-loaded by any DAW on your machine.
+Prebuilt binaries will be provided on the project website. Simply download the
+archive for your operating system and run the installer script described below.
+It handles copying the plug‑in to the standard VST3 directory so any DAW can
+pick it up without manual configuration.
 
 ## Building the plug-in
 
@@ -55,19 +59,22 @@ ready for installation.
 
 ### Installing the plug‑in
 
-Extract the archive and run the helper script:
+Extract the archive and run the helper script from anywhere:
 
 ```bash
 ./scripts/install_plugin.sh
 ```
 
-The script copies the library to the standard VST3 directory for each OS:
+The script locates the build folder automatically and copies the library to the
+standard VST3 directory for each OS:
 
 - **Windows** – `C:/Program Files/Common Files/VST3`
 - **macOS** – `/Library/Audio/Plug-Ins/VST3`
 - **Linux** – `~/.vst3`
 
-Once installed, any compatible DAW should automatically find the plug‑in.
+Once installed, any compatible DAW should automatically find the plug‑in. This
+"one-click" installer ensures your producer friends can download the archive,
+run the script, and start using Prism immediately.
 
 ## Running the example host
 
@@ -77,7 +84,10 @@ The build also produces a `PluginHost` executable. From the `build` folder run:
 ./PluginHost
 ```
 
-`PluginHost` loads `PrismVSTPlugin.so`, runs dummy audio through the `process` function and checks that the output matches the input. This helps verify that the plug-in can be loaded by external applications.
+`PluginHost` automatically selects the correct library extension for your OS,
+loads the plugin, runs dummy audio through the `process` function and checks
+that the output matches the input. This helps verify that the plug‑in can be
+loaded by external applications.
 
 ## Version control
 

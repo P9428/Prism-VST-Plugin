@@ -18,6 +18,8 @@ else
     exit 1
 fi
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BUILD_DIR="${SCRIPT_DIR}/../build"
 mkdir -p "$DEST"
-cp "build/${PLUGIN_NAME}${EXT}" "$DEST/" && \
+cp "${BUILD_DIR}/${PLUGIN_NAME}${EXT}" "$DEST/" && \
     echo "Installed ${PLUGIN_NAME}${EXT} to ${DEST}"
