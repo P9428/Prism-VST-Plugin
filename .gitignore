@@ -6,3 +6,7 @@ build/
 *.dylib
 # Generated files
 *.dll
+# Packages
+*.zip
+CPackConfig.cmake
+CPackSourceConfig.cmake
