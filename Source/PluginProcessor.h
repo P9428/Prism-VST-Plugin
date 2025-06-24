@@ -10,6 +10,7 @@ public:
     ~PrismAudioProcessor() override;
 
     TikTokAPIHandler& getAPIHandler() { return apiHandler; }
+    RightsChecker& getRightsChecker() { return rightsChecker; }
 
     void prepareToPlay(double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
@@ -36,7 +37,7 @@ public:
 
 private:
     AudioProcessorChain audioChain;
-    TikTokAPIHandler apiHandler;
+    TikTokAPIHandler apiHandler{audioChain, rightsChecker};
     RightsChecker rightsChecker;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PrismAudioProcessor)

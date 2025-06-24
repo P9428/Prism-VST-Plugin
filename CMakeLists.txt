@@ -24,8 +24,6 @@ target_sources(PrismVST PRIVATE
     Source/PluginEditor.h
     Source/LoudnessProcessor.cpp
     Source/LoudnessProcessor.h
-    Source/TikTokUploader.cpp
-    Source/TikTokUploader.h
     Source/RightsChecker.cpp
     Source/RightsChecker.h
     Source/Audio/AudioProcessorChain.cpp

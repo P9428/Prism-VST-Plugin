@@ -2,6 +2,7 @@
 
 void AudioProcessorChain::prepare(double sr, int /*blockSize*/) {
     sampleRate = sr;
+    loudness.prepare(sr, 0);
 }
 
 void AudioProcessorChain::pushAudio(const juce::AudioBuffer<float>& buffer) {
@@ -36,6 +37,6 @@ bool AudioProcessorChain::popProcessedAudio(juce::AudioBuffer<float>& dest) {
             dest.copyFrom(ch, size1, ringBuffer, ch, start2, size2);
     }
     fifo.finishedRead(size1 + size2);
-    // TODO: apply loudness normalization and encoding
+    loudness.process(dest);
     return true;
 }

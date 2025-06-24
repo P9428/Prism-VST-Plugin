@@ -1,9 +1,10 @@
 #pragma once
 #include <JuceHeader.h>
+#include "../RightsChecker.h"
 
 class TikTokAPIHandler : public juce::Thread {
 public:
-    TikTokAPIHandler();
+    TikTokAPIHandler(AudioProcessorChain& chain, RightsChecker& checker);
     ~TikTokAPIHandler() override;
 
     void authenticateAsync(std::function<void(bool)> cb);
@@ -17,4 +18,7 @@ private:
     std::function<void(bool)> callback;
     State state = Ready;
     juce::URL authUrl;
+    AudioProcessorChain& audioChain;
+    RightsChecker& rightsChecker;
+    juce::File tempAudioFile;
 };

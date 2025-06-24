@@ -1,5 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
+#include "../LoudnessProcessor.h"
 
 class AudioProcessorChain {
 public:
@@ -11,4 +12,5 @@ private:
     juce::AbstractFifo fifo { 16384 };
     juce::AudioBuffer<float> ringBuffer {2, 16384};
     double sampleRate = 44100.0;
+    LoudnessProcessor loudness;
 };

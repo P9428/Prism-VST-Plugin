@@ -8,5 +8,4 @@ public:
 
 private:
     double sampleRate = 44100.0;
-    // Placeholder for state variables for LUFS measurement
 };

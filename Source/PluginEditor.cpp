@@ -9,7 +9,16 @@ PrismAudioProcessorEditor::PrismAudioProcessorEditor(PrismAudioProcessor& p)
     shareButton.onClick = [this] {
         statusLabel.setText("Authorizing...", juce::dontSendNotification);
         processor.getAPIHandler().authenticateAsync([this](bool ok) {
-            statusLabel.setText(ok ? "Uploading..." : "Auth Failed", juce::dontSendNotification);
+            if (!ok) {
+                statusLabel.setText("Auth Failed", juce::dontSendNotification);
+                return;
+            }
+            statusLabel.setText("Uploading...", juce::dontSendNotification);
+            juce::File temp = juce::File::getSpecialLocation(juce::File::tempDirectory)
+                               .getChildFile("prism_audio.wav");
+            processor.getAPIHandler().uploadAsync(temp, [this](bool success) {
+                statusLabel.setText(success ? "Complete" : "Failed", juce::dontSendNotification);
+            });
         });
     };
     setSize(400, 150);
