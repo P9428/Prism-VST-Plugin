@@ -12,7 +12,7 @@ This repository contains a JUCE-based VST3/AU plugin that lets creators publish 
 ## Building
 
 1. Install the [JUCE](https://juce.com/get-juce) library and ensure the `JUCE` folder is located next to this repository (`/workspace/Prism-VST-Plugin/JUCE`).
-2. Install [FFMpeg](https://ffmpeg.org/) and make sure the `ffmpeg` executable is in your PATH.
+2. Install [FFMpeg](https://ffmpeg.org/) and make sure the `ffmpeg` executable is in your `PATH`.
 3. Create a build directory and run CMake:
 
 ```bash
@@ -29,6 +29,7 @@ Before building, define the following environment variables for your API credent
 export TIKTOK_CLIENT_ID=your_client_id
 export TIKTOK_CLIENT_SECRET=your_client_secret
 export ACRCLOUD_TOKEN=your_acr_token
+# On Windows use `set` instead of `export`
 ```
 
 ## Usage
@@ -43,3 +44,4 @@ Open the built plugin in a supported DAW (Ableton Live, FL Studio, Logic Pro). W
 ## Notes
 
 The plugin requires valid TikTok and ACRCloud credentials. Set the environment variables as described above before building.
+FFMpeg must be installed and accessible from the command line.
